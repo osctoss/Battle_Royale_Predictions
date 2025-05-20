@@ -26,7 +26,84 @@ This project analyzes player data from a Battle Royale game to predict the **sur
   - `LegendPlayer` & `UltimateLegend`: Flags for experienced and returning top-tier players.
   - `SurvivalTime`: Target variable categorized into `<10min`, `<20min`, `<30min` based on heuristics.
 
+## How to Run
+
+Clone the repository:
+git clone https://github.com/yourusername/your-repo.git
+cd your-repo
+
+Place the dataset Excel file as `Data/test_Battle_Royale.csv.xlsx`.
+
+Run the Python script or Jupyter notebook:
+python battle_royale_survival_prediction.py
+
+
+## Project Breakdown
+
+### Data Cleaning:
+
+* Fill missing categorical values with `'Unknown'`.
+* Fill missing numerical values with median values.
+
+### False Entry Filtering:
+
+* Remove suspicious player data based on specific conditions.
+
+### Target Labeling:
+
+* Predict survival time using rule-based heuristics.
+
+### Exploratory Data Analysis:
+
+* Visualize distributions of survival time, false entries, and player types.
+
+### Feature Encoding:
+
+* One-hot encode categorical variables.
+* Label encode target variable.
+
+### Model Training & Evaluation:
+
+* Train a Random Forest classifier.
+* Evaluate using accuracy, classification report, and confusion matrix.
+
 ---
+
+## Sample Visualizations
+
+* Survival Time distribution across players
+* False Entries by Activity Status and Tier
+* Counts of Legend and Ultimate Legend players
+* KD ratio distribution by Survival Time category
+
+---
+
+## Results
+
+* The model achieves an accuracy score of approximately **X%** (replace with actual accuracy after running).
+* Classification report and confusion matrix provide insights into prediction performance across survival time classes.
+
+---
+
+## Future Improvements
+
+* Experiment with other classification algorithms like XGBoost or LightGBM.
+* Hyperparameter tuning for better accuracy.
+* Incorporate more detailed player activity data.
+* Deploy the model as a web app or API for real-time prediction.
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Contact
+
+Created by **Your Name**
+Feel free to open issues or contribute!
 
 ## Dependencies
 
@@ -40,6 +117,4 @@ This project analyzes player data from a Battle Royale game to predict the **sur
 - openpyxl (for reading Excel files)
 
 Install dependencies with:
-
-```bash
 pip install pandas numpy matplotlib seaborn scikit-learn joblib openpyxl
