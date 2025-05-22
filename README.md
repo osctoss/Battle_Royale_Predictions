@@ -1,135 +1,136 @@
-# Battle Royale Survival Time Prediction
+# 🛡️ Battle Royale Survival Predictor 🧠🎮
 
-This project analyzes player data from a Battle Royale game to predict the **survival time** category of players based on their in-game statistics using machine learning.
-
----
-
-## Project Overview
-
-- **Data Source:** Player statistics from a Battle Royale game in an Excel file.
-- **Goal:** Predict how long a player is likely to survive in the game (`<10min`, `<20min`, `<30min`).
-- **Approach:**  
-  - Clean and preprocess data by handling missing values and filtering out false entries.  
-  - Apply heuristic rules to categorize survival time.  
-  - Train a Random Forest classifier on relevant features.  
-  - Evaluate the model using accuracy, classification report, and confusion matrix.
-- **Visualization:** Data insights and model results are visualized using seaborn and matplotlib.
+**Project Type:** Machine Learning, Data Analysis, Game Analytics
+**Tech Stack:** Python, Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, Jupyter Notebook
 
 ---
 
-## Features and Columns Used
+## 🎯 TL;DR
 
-- **Categorical Features:** `Role`, `Tier`, `ActivityStatus`, `Server`, `Mode`
-- **Numerical Features:** `Experience`, `Level`, `Achievements`, `KD` (Kill-Death ratio)
-- **Derived Features:**  
-  - `FalseEntry`: Identifies suspicious player data based on custom conditions.  
-  - `LegendPlayer` & `UltimateLegend`: Flags for experienced and returning top-tier players.  
-  - `SurvivalTime`: Target variable categorized into `<10min`, `<20min`, `<30min` based on heuristics.
+As both a gamer and a coder, I always wondered: *"Can I predict how long a player will survive in a Battle Royale match just from their stats?"*
+So, I trained a **Machine Learning model** to do exactly that, and added rich visualizations to analyze how experience, achievements, and region affect survival time.
+
+> This project has two sides:
+
+* 📊 `BRPrediction.ipynb` – for exploratory data analysis and interactive graphs
+* 🧠 `survival_model_training.py` – for model training and evaluation
 
 ---
 
-## Dependencies
+## 🧩 Problem We’re Solving
 
-- Python 3.x  
-- pandas  
-- numpy  
-- matplotlib  
-- seaborn  
-- scikit-learn  
-- joblib (for saving/loading models)  
-- openpyxl (for reading Excel files)  
+Survival time in Battle Royale games is not just luck — it's tied to experience, skill (KD ratio), region, and player behavior.
+However, in-game data often has **inconsistencies**, **false entries**, and **unstructured formats**. This project solves that by:
 
-Install dependencies with:
+* Cleaning and structuring raw BR player data
+* Predicting survival time using machine learning
+* Visualizing player behavior across servers, tiers, and activity levels
+
+---
+
+## 🎮 Dataset Overview
+
+We used a `.csv.xlsx` file containing player stats with features like:
+
+* `KD`, `Level`, `Experience`, `Achievements`
+* `Tier`, `Mode`, `Server`, `Role`, `ActivityStatus`
+
+Plus, we implemented logic to flag fake entries (e.g., low experience with high achievements or inconsistent tier vs activity status).
+
+---
+
+## 🚧 Project Structure
+
+```
+📁 BattleRoyaleSurvivalPredictor/
+│
+├── BRPrediction.ipynb            # Main notebook with visuals and insights
+├── src/survival_model_training.py    # Script to clean, process and train the ML model
+├── Data/test_Battle_Royale.csv.xlsx   # Raw dataset
+├── models/
+│   ├── survival_model.pkl        # Trained Random Forest model
+│   ├── label_encoder.pkl         # Label encoder for class labels
+│   └── feature_columns.pkl       # List of feature columns used for predictions
+└── README.md                     # You're reading it right now!
+```
+
+---
+
+## ⚙️ Features & Visuals
+
+### 📌 Model-Based Predictions
+
+* Uses a **Random Forest Classifier** to classify players into:
+
+  * `<10min`, `<20min`, `<30min`, or `Uncertain` categories
+* Rule-based logic to label training samples
+* Encoded, cleaned, and split before training
+
+### 📈 Visualizations in `BRPrediction.ipynb`
+
+* **Average KD & Survival Time per Server**
+* **Player distribution per region using interactive dots**
+* **Achievements vs Level per Region (Bubble Chart)**
+* **Tier-wise KD Ratio heatmaps**
+* Graphs designed to look **premium and gamer-friendly** with rich color palettes
+
+---
+
+## 🔮 How to Run
+
+### Option 1: Jupyter Notebook (Recommended for Analysis)
 
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn joblib openpyxl
-````
+jupyter notebook BRPrediction.ipynb
+```
+
+You’ll be able to:
+
+* See step-by-step visuals
+* Understand how stats differ per server, tier, and more
+* Run predictions on your custom player stats
+
+### Option 2: Python Script (For Model Training)
+
+```bash
+python survival_model_training.py
+```
+
+This will:
+
+* Load and clean data
+* Apply rule-based survival time labels
+* Train the model
+* Save the model and related files under `models/`
 
 ---
 
-## How to Run
+## 🎯 Why This Project is Cool
 
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/yourusername/your-repo.git
-   cd your-repo
-   ```
-
-2. Place the dataset Excel file as `Data/test_Battle_Royale.csv.xlsx`.
-
-3. Run the Python script or Jupyter notebook:
-
-   ```bash
-   python battle_royale_survival_prediction.py
-   ```
+* Combines gaming instincts with data science
+* Helps understand player psychology based on stats
+* Can be extended into a **real-time prediction app** for streamers or coaches
 
 ---
 
-## Project Breakdown
+## 💡 Future Plans
 
-### Data Cleaning
-
-* Fill missing categorical values with `'Unknown'`.
-* Fill missing numerical values with median values.
-
-### False Entry Filtering
-
-* Remove suspicious player data based on specific conditions.
-
-### Target Labeling
-
-* Predict survival time using rule-based heuristics.
-
-### Exploratory Data Analysis
-
-* Visualize distributions of survival time, false entries, and player types.
-
-### Feature Encoding
-
-* One-hot encode categorical variables.
-* Label encode target variable.
-
-### Model Training & Evaluation
-
-* Train a Random Forest classifier.
-* Evaluate using accuracy, classification report, and confusion matrix.
+* Build a web-based predictor using Streamlit or Flask
+* Let players upload their stats and get survival predictions + gameplay tips
+* Add clustering to group similar players and strategies
 
 ---
 
-## Sample Visualizations
+## 👨‍💻 Author
 
-* Survival Time distribution across players
-* False Entries by Activity Status and Tier
-* Counts of Legend and Ultimate Legend players
-* KD ratio distribution by Survival Time category
-
----
-
-## Results
-
-* The model achieves an accuracy score of approximately **X%** (replace with actual accuracy after running).
-* Classification report and confusion matrix provide insights into prediction performance across survival time classes.
+**Manish Patel (aka Osctoss)**
+📫 [osctoss.net@gmail.com](mailto:osctoss.net@gmail.com)
+🌐 [LinkedIn](https://linkedin.com/in/manish-patel-osctoss) | [GitHub](https://github.com/osctoss)
 
 ---
 
-## Future Improvements
+## 🧠 Pro Tip for Coders
 
-* Experiment with other classification algorithms like XGBoost or LightGBM.
-* Hyperparameter tuning for better accuracy.
-* Incorporate more detailed player activity data.
-* Deploy the model as a web app or API for real-time prediction.
+> When data speaks, strategy wins. Whether it's zones or zeroes, let your model guide your shots.
 
 ---
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## Contact
-
-Created by **Manish Patel**
-Feel free to open issues or contribute!
-Find me on [GitHub](https://github.com/osctoss)
